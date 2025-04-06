@@ -13,7 +13,7 @@ const app = express();
 
 // ✅ Enable CORS (Explicitly allow frontend requests)
 app.use(cors({
-  origin: "http://localhost:3000", // Allow frontend
+  origin: ["http://localhost:3000" , "https://exptracker-beige.vercel.app"], // Allow frontend
   methods: ["GET", "POST", "DELETE"],
   allowedHeaders: ["Content-Type"]
 }));
