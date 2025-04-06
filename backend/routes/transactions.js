@@ -13,7 +13,7 @@ router.get("/", async (req, res) => {
 });
 
 // ✅ POST: Add a transaction
-router.post("/", async (req, res) => {
+router.post("/api/transactions", async (req, res) => {
   try {
     const { text, amount } = req.body;
     const newTransaction = new Transaction({ text, amount });

@@ -9,7 +9,7 @@ function Home() {
 
   // ✅ Fetch transactions from backend
   useEffect(() => {
-    fetch("http://localhost:5000/api/transactions")
+    fetch("https://exptracker-qb2t.onrender.com")
       .then((res) => res.json())
       .then((data) => setTransactions(data))
       .catch((err) => console.error("Error fetching transactions:", err));
@@ -17,7 +17,7 @@ function Home() {
 
   // ✅ Add a transaction
   const addTransaction = async (transaction) => {
-    const response = await fetch("http://localhost:5000/api/transactions", {
+    const response = await fetch("https://exptracker-qb2t.onrender.com/api/transactions", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(transaction),
@@ -28,7 +28,7 @@ function Home() {
   
   // ✅ Delete a transaction
   const deleteTransaction = async (id) => {
-    await fetch(`http://localhost:5000/api/transactions/${id}`, { method: "DELETE" });
+    await fetch(`https://exptracker-qb2t.onrender.com/${id}`, { method: "DELETE" });
     setTransactions(transactions.filter((transaction) => transaction._id !== id));
   };
 
