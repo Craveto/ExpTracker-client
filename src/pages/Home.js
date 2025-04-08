@@ -4,12 +4,13 @@ import TransactionList from "../components/TransactionList";
 import AddTransaction from "../components/AddTransaction";
 import ExpenseChart from "../components/ExpenseChart";
 
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 function Home() {
   const [transactions, setTransactions] = useState([]);
 
   // ✅ Fetch transactions from backend
   useEffect(() => {
-    fetch(`${import.meta.env.VITE_API_URL}/transactions`)
+    fetch(`${API_BASE_URL}/transactions`)
       .then((res) => res.json())
       .then((data) => setTransactions(data))
       .catch((err) => console.error("Error fetching transactions:", err));
@@ -17,7 +18,7 @@ function Home() {
 
   // ✅ Add a transaction
   const addTransaction = async (transaction) => {
-    const response = await fetch(`${import.meta.env.VITE_API_URL}/transactions`, {
+    const response = await fetch(`${API_BASE_URL}/transactions`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(transaction),
@@ -28,7 +29,7 @@ function Home() {
       console.error("Backend error response:", text);
       throw new Error("Failed to add transaction");
     }
-    
+
     const data = await response.json();
     setTransactions([...transactions, data]);
   };
@@ -37,7 +38,7 @@ function Home() {
   
   // ✅ Delete a transaction
   const deleteTransaction = async (id) => {
-    await fetch(`${import.meta.env.VITE_API_URL}/transactions/${id}`, { method: "DELETE" });
+    await fetch(`${API_BASE_URL}/transactions/${id}`, { method: "DELETE" });
     setTransactions(transactions.filter((transaction) => transaction._id !== id));
   };
 

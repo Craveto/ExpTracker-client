@@ -7,13 +7,27 @@ const dotenv = require("dotenv");
 const transactionRoutes = require("./routes/transactionRoutes");
 
 
+
 dotenv.config();
 
-const app = express();
+const app = express(); 
+
+
 
 // ✅ Enable CORS (Explicitly allow frontend requests)
+const allowedOrigins = [
+  'http://localhost:3000',
+  'https://exptracker-beige.vercel.app'
+];
+
 app.use(cors({
-  origin: [ "https://exptracker-beige.vercel.app"], // Allow frontend  "http://localhost:3000" ,
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   methods: ["GET", "POST", "DELETE"],
   allowedHeaders: ["Content-Type"]
 }));
