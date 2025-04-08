@@ -13,7 +13,7 @@ const app = express();
 
 // ✅ Enable CORS (Explicitly allow frontend requests)
 app.use(cors({
-  origin: ["http://localhost:3000" , "https://exptracker-beige.vercel.app"], // Allow frontend
+  origin: [ "https://exptracker-beige.vercel.app"], // Allow frontend  "http://localhost:3000" ,
   methods: ["GET", "POST", "DELETE"],
   allowedHeaders: ["Content-Type"]
 }));
@@ -21,6 +21,9 @@ app.use(cors({
 app.use(express.json()); // ✅ Middleware to parse JSON
 
 const PORT = process.env.PORT || 5000;
+
+// ✅ Use Transaction Routes
+app.use("/api/transactions", transactionRoutes);
 
 // ✅ MongoDB Connection
 mongoose
@@ -34,8 +37,7 @@ app.use((req, res, next) => {
   next();
 });
 
-// ✅ Use Transaction Routes
-app.use("/api/transactions", transactionRoutes);
+
 
 // ✅ Start Server
 app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));

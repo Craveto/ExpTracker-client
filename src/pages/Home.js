@@ -22,9 +22,18 @@ function Home() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(transaction),
     });
+
+    if (!response.ok) {
+      const text = await response.text();
+      console.error("Backend error response:", text);
+      throw new Error("Failed to add transaction");
+    }
+    
     const data = await response.json();
     setTransactions([...transactions, data]);
   };
+   
+    
   
   // ✅ Delete a transaction
   const deleteTransaction = async (id) => {
