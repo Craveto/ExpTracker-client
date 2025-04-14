@@ -7,7 +7,8 @@ import ExpenseChart from "../components/ExpenseChart";
 
 console.log("ENV:", process.env.REACT_APP_API_URL);
 
-const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
+const API_URL = "https://exptracker-qb2t.onrender.com/api/transactions" ; // hardcoded working backend
+
 function Home() {
   const [transactions, setTransactions] = useState([]);
 
