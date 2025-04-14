@@ -14,7 +14,7 @@ function Home() {
   console.log("API_URL:", API_URL);
   // ✅ Fetch transactions from backend
   useEffect(() => {
-    fetch(`${API_URL}/transactions`)
+    fetch(`${API_URL}`)
       .then((res) => res.json())
       .then((data) => setTransactions(data))
       .catch((err) => console.error("Error fetching transactions:", err));
@@ -22,7 +22,7 @@ function Home() {
 
   // ✅ Add a transaction
   const addTransaction = async (transaction) => {
-    const response = await fetch(`${API_URL}/transactions`, {
+    const response = await fetch(`${API_URL}`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(transaction),
@@ -42,7 +42,7 @@ function Home() {
   
   // ✅ Delete a transaction
   const deleteTransaction = async (id) => {
-    await fetch(`${API_URL}/transactions/${id}`, { method: "DELETE" });
+    await fetch(`${API_URL}/${id}`, { method: "DELETE" });
     setTransactions(transactions.filter((transaction) => transaction._id !== id));
   };
 
